@@ -1,38 +1,46 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Test Iframe Penguins">
-  <main class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Visualisation via Iframe</h1>
-
-    
-    <nav class="flex gap-4 mb-6">
-      <a href="/species/Adelie" target="viewer" class="text-blue-600 underline">Adelie</a>
-      <a href="/species/Gentoo" target="viewer" class="text-blue-600 underline">Gentoo</a>
-      <a href="/species/Chinstrap" target="viewer" class="text-blue-600 underline">Chinstrap</a>
-    </nav>
+<Layout>
 
 
-    <iframe 
-      src="/species/Adelie" 
-      name="viewer" 
-      id="penguin-iframe" 
-      class="w-full border rounded"
-      style="min-height: 400px;"
-      onload="resizeIframe(this)">
-    </iframe>
-  </main>
+  <h1 class="text-2xl mb-6">Navigation avec iframe</h1>
 
+  
+  <nav class="mb-6">
+    <div class="flex space-x-4">
+      <a href="/species/ifram/Adelie" target="species-frame" class="rounded bg-blue-500 text-white px-4 py-2 inline-block">
+        Adelie
+      </a>
+      <a href="/species/ifram/Gentoo" target="species-frame" class="rounded bg-yellow-500 text-white px-4 py-2 inline-block">
+        Gentoo
+      </a>
+      <a href="/species/ifram/Chinstrap" target="species-frame" class="rounded bg-purple-500 text-white px-4 py-2 inline-block">
+        Chinstrap
+      </a>
+    </div>
+  </nav>
+
+
+  <iframe 
+    name="species-frame"
+    src="/species/ifram/Adelie"
+    class="w-full border border-gray-300 rounded"
+    id="species-iframe"
+    style="height: 550px;"
+    onload="adjustHeight()"
+  ></iframe>
 
   <script>
-    function resizeIframe(iframe) {
-      try {
-        const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        iframe.style.height = innerDoc.body.scrollHeight + "px";
-      } catch (e) {
-        console.error("Impossible de redimensionner l'iframe :", e);
-      }
+    function adjustHeight() {
+      const iframe = document.getElementById('species-iframe');
+      const windowHeight = window.innerHeight;
+      const newHeight = Math.max(windowHeight * 0.6, 550);
+      iframe.style.height = newHeight + 'px';
     }
+    window.addEventListener('resize', adjustHeight);
+    document.addEventListener('DOMContentLoaded', adjustHeight);
   </script>
+
 </Layout>
