@@ -1,16 +1,19 @@
 ---
+import Layout from '../layouts/Layout.astro'
 import { Tabs, TabsList, TabsTab, TabsPanel } from 'accessible-astro-components'
 import GraphicSpecies from '../components/GraphicSpecies.astro'
 // import '../styles/global.css'
+
 ---
+<Layout>
 <div class="mb-4">
     <a href="/" class="rounded bg-gray-600 text-white px-4 py-2 inline-block">Retour à l'accueil</a>
   </div>
 <Tabs>
-  <TabsList>
-    <TabsTab id="tab1" controls="panel-Adelie" selected>Adelie</TabsTab>
-    <TabsTab id="tab2" controls="panel-Gentoo">Gentoo</TabsTab>
-    <TabsTab id="tab3" controls="panel-Chinstrap">Chinstrap</TabsTab>
+  <TabsList  aria-label="Choisir une espèce">
+    <TabsTab class ="mb-4 aria-selected:bg-sky-950! hover:bg-sky-500!" id="tab1" controls="panel-Adelie" selected>Adelie</TabsTab>
+    <TabsTab class ="mb-4 aria-selected:bg-orange-200! hover:bg-orange-500!" id="tab2" controls="panel-Gentoo">Gentoo</TabsTab>
+    <TabsTab class ="mb-4 aria-selected:bg-purple-950! hover:bg-purple-500!" id="tab3" controls="panel-Chinstrap">Chinstrap</TabsTab>
   </TabsList>
 
   <TabsPanel id="panel-Adelie" labelledby="tab-Adelie" selected>
@@ -23,3 +26,4 @@ import GraphicSpecies from '../components/GraphicSpecies.astro'
     <GraphicSpecies species="Chinstrap" />
   </TabsPanel>
 </Tabs>
+</Layout>
