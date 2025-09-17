@@ -9,16 +9,13 @@ import Layout from "../layouts/Layout.astro";
 
   
   <nav class="mb-6">
-    <div class="flex space-x-4">
-      <a href="/species/ifram/Adelie" target="species-frame" class="rounded bg-blue-500 text-white px-4 py-2 inline-block">
-        Adelie
-      </a>
-      <a href="/species/ifram/Gentoo" target="species-frame" class="rounded bg-yellow-500 text-white px-4 py-2 inline-block">
-        Gentoo
-      </a>
-      <a href="/species/ifram/Chinstrap" target="species-frame" class="rounded bg-purple-500 text-white px-4 py-2 inline-block">
-        Chinstrap
-      </a>
+    <div class="flex space-x-4 items-center">
+      <label for="species-select" class="text-gray-700">Choisir une espèce:</label>
+      <select id="species-select" class="rounded border border-gray-300 px-3 py-2">
+        <option value="Adelie">Adelie</option>
+        <option value="Gentoo">Gentoo</option>
+        <option value="Chinstrap">Chinstrap</option>
+      </select>
     </div>
   </nav>
 
@@ -33,12 +30,25 @@ import Layout from "../layouts/Layout.astro";
   ></iframe>
 
   <script>
+    // Gestion du changement d'espèce via le select
+    document.querySelector("#species-select")?.addEventListener("change", (evt) => {
+      const value = (evt.target as HTMLSelectElement).value;
+      const iframe = document.getElementById('species-iframe') as HTMLIFrameElement;
+      if (iframe && value) {
+        iframe.src = "/species/ifram/" + value;
+      }
+    });
+
+    // Fonction d'ajustement de la hauteur
     function adjustHeight() {
-      const iframe = document.getElementById('species-iframe');
-      const windowHeight = window.innerHeight;
-      const newHeight = Math.max(windowHeight * 0.6, 550);
-      iframe.style.height = newHeight + 'px';
+      const iframe = document.getElementById('species-iframe') as HTMLIFrameElement;
+      if (iframe) {
+        const windowHeight = window.innerHeight;
+        const newHeight = Math.max(windowHeight * 0.6, 550);
+        iframe.style.height = newHeight + 'px';
+      }
     }
+    
     window.addEventListener('resize', adjustHeight);
     document.addEventListener('DOMContentLoaded', adjustHeight);
   </script>

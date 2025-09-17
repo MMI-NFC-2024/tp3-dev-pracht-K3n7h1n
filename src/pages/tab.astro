@@ -1,0 +1,25 @@
+---
+import { Tabs, TabsList, TabsTab, TabsPanel } from 'accessible-astro-components'
+import GraphicSpecies from '../components/GraphicSpecies.astro'
+// import '../styles/global.css'
+---
+<div class="mb-4">
+    <a href="/" class="rounded bg-gray-600 text-white px-4 py-2 inline-block">Retour à l'accueil</a>
+  </div>
+<Tabs>
+  <TabsList>
+    <TabsTab id="tab1" controls="panel-Adelie" selected>Adelie</TabsTab>
+    <TabsTab id="tab2" controls="panel-Gentoo">Gentoo</TabsTab>
+    <TabsTab id="tab3" controls="panel-Chinstrap">Chinstrap</TabsTab>
+  </TabsList>
+
+  <TabsPanel id="panel-Adelie" labelledby="tab-Adelie" selected>
+    <GraphicSpecies species="Adelie" />
+  </TabsPanel>
+  <TabsPanel id="panel-Gentoo" labelledby="tab-Gentoo">
+    <GraphicSpecies species="Gentoo" />
+  </TabsPanel>
+  <TabsPanel id="panel-Chinstrap" labelledby="tab-Chinstrap">
+    <GraphicSpecies species="Chinstrap" />
+  </TabsPanel>
+</Tabs>

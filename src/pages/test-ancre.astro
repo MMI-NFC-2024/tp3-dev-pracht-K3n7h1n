@@ -10,10 +10,13 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
 
   <a href="/" class="rounded bg-gray-600 text-white px-4 py-2 inline-block mb-4">Retour</a>
 
-  <nav class="mb-6 flex space-x-4">
-    <a href="#adelie" class="rounded  text-white px-4 py-2">Adelie</a>
-    <a href="#gentoo" class="rounded  text-white px-4 py-2">Gentoo</a>
-    <a href="#chinstrap" class="rounded  text-white px-4 py-2">Chinstrap</a>
+  <nav class="mb-6 flex space-x-4 items-center">
+    <label for="species-anchor-select" class="text-gray-700">Choisir une espèce:</label>
+    <select id="species-anchor-select" class="rounded border border-gray-300 px-3 py-2">
+      <option value="adelie">Adelie</option>
+      <option value="gentoo">Gentoo</option>
+      <option value="chinstrap">Chinstrap</option>
+    </select>
   </nav>
 
 
@@ -33,6 +36,24 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
       <GraphicSpecies species="Chinstrap" />
     </div>
   </div>
+
+  <script>
+    document.querySelector("#species-anchor-select")?.addEventListener("change", (evt) => {
+      const value = (evt.target as HTMLSelectElement).value;
+      if (value) {
+        location.hash = "#" + value;
+      }
+    });
+
+    // Synchroniser le select avec l'ancre actuelle au chargement de la page
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentHash = location.hash.substring(1); // Enlever le #
+      const select = document.querySelector("#species-anchor-select") as HTMLSelectElement;
+      if (select && currentHash) {
+        select.value = currentHash;
+      }
+    });
+  </script>
 </Layout>
 
 <style>
