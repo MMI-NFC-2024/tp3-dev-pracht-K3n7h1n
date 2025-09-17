@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <header>
+  <h1 class="text-2xl">Mon site de manchots</h1>
+  <nav>
+    <ul>
+      <li><a class="text-blue-500 hover:underline" href="/">Accueil</a></li>
+      <li><a class="text-blue-500 hover:underline" href="/species/Adelie">Adelie</a></li>
+      <li><a class="text-blue-500 hover:underline" href="/species/Chinstrap">Chinstrap</a></li>
+      <li><a class="text-blue-500 hover:underline" href="/species/Gentoo">Gentoo</a></li>
+      <li><a class="text-blue-500 hover:underline" href="/test-iframe">Test Iframe</a></li>
+      <li><a class="text-blue-500 hover:underline" href="/test-ancre">Test Ancre</a></li>
+    </ul>
+  </nav>
+</header>
+  <body>
+    <slot />
+  </body>
+</html>
+
+
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

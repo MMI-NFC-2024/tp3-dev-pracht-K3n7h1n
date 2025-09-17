@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Test Iframe Penguins">
+  <main class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Visualisation via Iframe</h1>
+
+    
+    <nav class="flex gap-4 mb-6">
+      <a href="/species/Adelie" target="viewer" class="text-blue-600 underline">Adelie</a>
+      <a href="/species/Gentoo" target="viewer" class="text-blue-600 underline">Gentoo</a>
+      <a href="/species/Chinstrap" target="viewer" class="text-blue-600 underline">Chinstrap</a>
+    </nav>
+
+
+    <iframe 
+      src="/species/Adelie" 
+      name="viewer" 
+      id="penguin-iframe" 
+      class="w-full border rounded"
+      style="min-height: 400px;"
+      onload="resizeIframe(this)">
+    </iframe>
+  </main>
+
+
+  <script>
+    function resizeIframe(iframe) {
+      try {
+        const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        iframe.style.height = innerDoc.body.scrollHeight + "px";
+      } catch (e) {
+        console.error("Impossible de redimensionner l'iframe :", e);
+      }
+    }
+  </script>
+</Layout>
