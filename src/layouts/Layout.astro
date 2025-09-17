@@ -14,18 +14,27 @@ import "../styles/global.css";
   <header>
   <h1 class="text-2xl">Mon site de manchots</h1>
   <nav>
-    <ul>
-      <li><a class="text-blue-500 hover:underline" href="/">Accueil</a></li>
-      <li><a class="text-blue-500 hover:underline" href="/species/Adelie">Adelie</a></li>
-      <li><a class="text-blue-500 hover:underline" href="/species/Chinstrap">Chinstrap</a></li>
-      <li><a class="text-blue-500 hover:underline" href="/species/Gentoo">Gentoo</a></li>
-      <li><a class="text-blue-500 hover:underline" href="/test-iframe">Test Iframe</a></li>
-      <li><a class="text-blue-500 hover:underline" href="/test-ancre">Test Ancre</a></li>
-    </ul>
+    <a class="text-blue-500 hover:underline" href="/">Accueil</a> | 
+    <select id="species">
+      <option value="">Choisir une espèce</option>
+      <option value="Adelie">Adelie</option>
+      <option value="Chinstrap">Chinstrap</option>
+      <option value="Gentoo">Gentoo</option>
+    </select> | 
+    <a class="text-blue-500 hover:underline" href="/test-iframe">Test Iframe</a> | 
+    <a class="text-blue-500 hover:underline" href="/test-ancre">Test Ancre</a>
   </nav>
 </header>
   <body>
     <slot />
+    <script>
+      document.querySelector("#species")?.addEventListener("change", (evt) => {
+        const value = (evt.target as HTMLSelectElement).value;
+        if (value) {
+          location.pathname = "/species/" + value;
+        }
+      });
+    </script>
   </body>
 </html>
 
